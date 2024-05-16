@@ -1,4 +1,5 @@
 // hooks/useForm.tsx
+import { validateForm } from "@/app/Auth/_FormValidation/FormValidation";
 import { useState, ChangeEvent, FocusEvent } from "react";
 
 interface FormData {
@@ -19,21 +20,21 @@ const useForm = (initialValues: FormData) => {
       ...formData,
       [name]: value,
     });
+
+    const error = validateForm(name, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
   };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (value.trim() === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: `${name} is required`,
-      }));
-    } else {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: "",
-      }));
-    }
+    const error = validateForm(name, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
   };
 
   return {
@@ -41,6 +42,8 @@ const useForm = (initialValues: FormData) => {
     errors,
     handleChange,
     handleBlur,
+    setErrors,
+    setFormData,
   };
 };
 

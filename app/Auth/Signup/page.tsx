@@ -4,22 +4,43 @@ import InputField from "@/app/Components/UI/Form/InputField";
 import useForm from "@/app/Hooks/FormHook/useForm";
 import Link from "next/link";
 import React, { ChangeEvent, FocusEvent } from "react";
+import { validateForm } from "../_FormValidation/FormValidation";
+
+const initialSignupFormState = {
+  name: "",
+  email: "",
+  password: "",
+};
 
 const Signup: React.FC = () => {
-  const { formData, errors, handleChange, handleBlur } = useForm({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const { formData, errors, handleChange, handleBlur, setErrors, setFormData } =
+    useForm(initialSignupFormState);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.password) {
-      alert("All fields are required");
+    for (const [name, value] of Object.entries(formData)) {
+      const error = validateForm(name, value);
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: error,
+      }));
+    }
+
+    if (
+      errors.name ||
+      errors.email ||
+      errors.password ||
+      !formData.name ||
+      !formData.email ||
+      !formData.password
+    ) {
       return;
     }
+
     // Submit the form (e.g., send data to an API)
     console.log("Form submitted:", formData);
+
+    setFormData(initialSignupFormState);
   };
 
   return (
