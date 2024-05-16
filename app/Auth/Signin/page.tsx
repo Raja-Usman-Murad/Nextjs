@@ -37,9 +37,6 @@ const SignIn: React.FC = () => {
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {errors.email && (
-          <p className="text-red-500 text-xs italic">{errors.email}</p>
-        )}
 
         <InputField
           label="Password"
@@ -50,9 +47,6 @@ const SignIn: React.FC = () => {
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {errors.password && (
-          <p className="text-red-500 text-xs italic">{errors.password}</p>
-        )}
 
         <button
           type="submit"
