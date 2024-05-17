@@ -18,7 +18,10 @@ export const setLocalStorage: SetLocalStorage = (key, value) => {
 };
 
 export const getLocalStorage: GetLocalStorage = (key) => {
-  return window.localStorage.getItem(key);
+  if (typeof window !== "undefined") {
+    return window.localStorage.getItem(key);
+  }
+  return null;
 };
 
 export const removeLocalStorage: RemoveLocalStorage = (key) => {
