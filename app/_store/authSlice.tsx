@@ -10,11 +10,13 @@ interface SetAuthInitialState {
   isAuthenticated: boolean;
 }
 
+const userData = getLocalStorage("user");
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    token: JSON.parse(getLocalStorage("user") || "null")?.token || null, // Get the token from local storage
-    isAuthenticated: false,
+    token: JSON.parse(userData || "null")?.token || null, // Get the token from local storage
+    isAuthenticated: userData ? true : false,
   } as SetAuthInitialState,
   reducers: {
     Login(state, action) {

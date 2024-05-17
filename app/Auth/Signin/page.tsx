@@ -6,6 +6,12 @@ import useForm from "@/app/Hooks/FormHook/useForm";
 import Link from "next/link";
 import React from "react";
 import { validateForm } from "../_FormValidation/FormValidation";
+import { login } from "@/app/_api/auth";
+import { useDispatch } from "react-redux";
+import { showToast } from "@/app/helper/toast";
+import { useRouter } from "next/navigation";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const initialSigninFormState = {
   email: "",
@@ -13,10 +19,12 @@ const initialSigninFormState = {
 };
 
 const SignIn: React.FC = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const { formData, errors, handleChange, handleBlur, setErrors, setFormData } =
     useForm(initialSigninFormState);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     for (const [name, value] of Object.entries(formData)) {
@@ -38,7 +46,23 @@ const SignIn: React.FC = () => {
     // Submit the form (e.g., send data to an API)
     console.log("Form submitted:", formData);
 
-    setFormData(initialSigninFormState);
+    try {
+      const response: any = await dispatch(login(formData));
+
+      if (response.data.success) {
+        showToast(response.data.message, "success");
+        setFormData(initialSigninFormState);
+        // Redirect to the sign-in page after successful sign-up
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      } else {
+        showToast(response.data.message, "error");
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      showToast("An error occurred. Please try again.", "error");
+    }
   };
 
   return (
@@ -79,6 +103,7 @@ const SignIn: React.FC = () => {
           </Link>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

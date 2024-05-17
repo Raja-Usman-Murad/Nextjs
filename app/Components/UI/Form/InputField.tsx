@@ -6,7 +6,7 @@ interface InputFieldProps {
   type: string;
   name: string;
   value: string;
-  error: string;
+  error: string | false | undefined;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: FocusEvent<HTMLInputElement>) => void;
 }
