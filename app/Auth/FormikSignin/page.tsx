@@ -66,7 +66,7 @@ const FormikSignIn: React.FC = () => {
             <div className="text-center mt-4">
               <Link
                 className="text-blue-500 hover:text-blue-700"
-                href="FormikSignup"
+                href="formikSignup"
               >
                 Don't have an account? Create one.
               </Link>

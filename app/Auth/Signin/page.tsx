@@ -103,7 +103,7 @@ const SignIn: React.FC = () => {
           Sign In
         </button>
         <div className="text-center mt-4">
-          <Link href="Signup" className="text-blue-500 hover:text-blue-700">
+          <Link href="signup" className="text-blue-500 hover:text-blue-700">
             Don't have an account? Create one.
           </Link>
         </div>
