@@ -12,6 +12,7 @@ import { showToast } from "@/app/helper/toast";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { setCookie } from "nookies"; // This is for Next.js to set cookies
 
 const initialSigninFormState = {
   email: "",
@@ -50,6 +51,10 @@ const SignIn: React.FC = () => {
       const response: any = await dispatch(login(formData));
 
       if (response.data.success) {
+        setCookie(null, "token", response.data.data.token, {
+          maxAge: 86400, // 1 day in seconds
+          path: "/", // Root path so that all requests can access it
+        });
         showToast(response.data.message, "success");
         setFormData(initialSigninFormState);
         // Redirect to the sign-in page after successful sign-up
