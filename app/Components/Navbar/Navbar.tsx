@@ -2,9 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Lists", href: "/lists" },
+  { name: "List Detail", href: "/lists/10" },
+  { name: "About", href: "/about" },
+];
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathName = usePathname();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -15,34 +24,26 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div>
           <Link className="text-white hover:text-gray-300" href="/">
-            Home
+            RAJA USMAN
           </Link>
         </div>
         <div className="hidden md:block">
           <ul className="flex space-x-4">
-            <li>
-              <Link className="text-white hover:text-gray-300" href="/lists">
-                Lists
-              </Link>
-            </li>
-            <li>
-              <Link className="text-white hover:text-gray-300" href="/lists/10">
-                List Detail
-              </Link>
-            </li>
-            <li>
-              <Link className="text-white hover:text-gray-300" href="/about">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="text-white hover:text-gray-300"
-                href="/docs/featur1"
-              >
-                Docs
-              </Link>
-            </li>
+            {navLinks?.map((navLink) => {
+              const isActive = navLink.href === pathName;
+              return (
+                <li key={navLink?.name}>
+                  <Link
+                    className={`text-white hover:text-gray-300 ${
+                      isActive ? "font-bold" : ""
+                    }`}
+                    href={navLink?.href}
+                  >
+                    {navLink?.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="hidden md:block">
@@ -80,30 +81,21 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden">
           <ul className="mt-2">
-            <li>
-              <Link
-                className="block text-white hover:text-gray-300"
-                href="/lists"
-              >
-                Lists
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="block text-white hover:text-gray-300"
-                href="/about"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="block text-white hover:text-gray-300"
-                href="/docs/feature1"
-              >
-                Docs
-              </Link>
-            </li>
+            {navLinks?.map((navLink) => {
+              const isActive = navLink.href === pathName;
+              return (
+                <li key={navLink?.name}>
+                  <Link
+                    className={`text-white hover:text-gray-300 ${
+                      isActive ? "font-bold" : ""
+                    }`}
+                    href={navLink?.href}
+                  >
+                    {navLink?.name}
+                  </Link>
+                </li>
+              );
+            })}
             <li>
               <button
                 className="block text-white hover:text-gray-300"
