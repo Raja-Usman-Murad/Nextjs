@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./_store/StoreProvider";
-import Navbar from "./Components/Navbar/Navbar";
-import Footer from "./Components/Footer/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import ConditionalLayout from "./Components/ConditionalLayout/ConditionalLayout";
 
 export const metadata: Metadata = {
   title: "Next js",
@@ -20,10 +16,8 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
-        <body className={inter.className + " h-screen flex flex-col"}>
-          <Navbar />
-          {children}
-          <Footer />
+        <body className="h-screen flex flex-col">
+          <ConditionalLayout>{children}</ConditionalLayout>
         </body>
       </html>
     </StoreProvider>
