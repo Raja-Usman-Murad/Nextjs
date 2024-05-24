@@ -51,7 +51,7 @@ const Signup: React.FC = () => {
         setFormData(initialSignupFormState);
         // Redirect to the sign-in page after successful sign-up
         setTimeout(() => {
-          router.push("Signin");
+          router.push("/signin");
         }, 2000);
       } else {
         showToast(response.data.message, "error");
