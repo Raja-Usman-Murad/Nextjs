@@ -1,9 +1,6 @@
-import React from "react";
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "About Page",
-};
+import React from "react";
 
 function getRandomInt(count: number): number {
   return Math.floor(Math.random() * 2);
