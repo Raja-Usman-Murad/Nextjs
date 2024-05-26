@@ -1,33 +1,29 @@
-// pages/signin.tsx
+// pages/signup.tsx
 "use client";
-
 import InputField from "@/app/Components/UI/Form/InputField";
 import useForm from "@/app/Hooks/FormHook/useForm";
 import Link from "next/link";
 import React from "react";
 import { validateForm } from "../_FormValidation/FormValidation";
-import { login } from "@/app/_api/auth";
-import { useDispatch } from "react-redux";
+import { addNewUser } from "@/app/_api/auth";
 import { showToast } from "@/app/helper/toast";
-import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { setCookie } from "nookies"; // This is for Next.js to set cookies
+import { useRouter } from "next/navigation";
 
-const initialSigninFormState = {
+const initialSignupFormState = {
+  name: "",
   email: "",
   password: "",
 };
 
-const SignIn: React.FC = () => {
-  const dispatch = useDispatch();
+const Signup: React.FC = () => {
   const router = useRouter();
   const { formData, errors, handleChange, handleBlur, setErrors, setFormData } =
-    useForm(initialSigninFormState);
+    useForm(initialSignupFormState);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     for (const [name, value] of Object.entries(formData)) {
       const error = validateForm(name, value);
       setErrors((prevErrors) => ({
@@ -37,35 +33,31 @@ const SignIn: React.FC = () => {
     }
 
     if (
+      errors.name ||
       errors.email ||
       errors.password ||
+      !formData.name ||
       !formData.email ||
       !formData.password
     ) {
       return;
     }
-    // Submit the form (e.g., send data to an API)
-    console.log("Form submitted:", formData);
 
     try {
-      const response: any = await dispatch(login(formData));
+      const response: any = await addNewUser(formData);
 
       if (response.data.success) {
-        setCookie(null, "token", response.data.data.token, {
-          maxAge: 86400, // 1 day in seconds
-          path: "/", // Root path so that all requests can access it
-        });
         showToast(response.data.message, "success");
-        setFormData(initialSigninFormState);
+        setFormData(initialSignupFormState);
         // Redirect to the sign-in page after successful sign-up
         setTimeout(() => {
-          router.push("/");
+          router.push("/signin");
         }, 2000);
       } else {
         showToast(response.data.message, "error");
       }
     } catch (error) {
-      console.error("Error signing in:", error);
+      console.error("Error signing up:", error);
       showToast("An error occurred. Please try again.", "error");
     }
   };
@@ -77,11 +69,21 @@ const SignIn: React.FC = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm"
       >
         <InputField
+          label="Name"
+          type="text"
+          name="name"
+          value={formData.name}
+          error={errors.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+
+        <InputField
           label="Email"
           type="email"
           name="email"
-          error={errors.email}
           value={formData.email}
+          error={errors.email}
           onChange={handleChange}
           onBlur={handleBlur}
         />
@@ -100,11 +102,11 @@ const SignIn: React.FC = () => {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
         >
-          Sign In
+          Sign Up
         </button>
         <div className="text-center mt-4">
-          <Link href="Signup" className="text-blue-500 hover:text-blue-700">
-            Don't have an account? Create one.
+          <Link href="signin" className="text-blue-500 hover:text-blue-700">
+            Already have an account? Log In
           </Link>
         </div>
       </form>
@@ -113,4 +115,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default Signup;
