@@ -1,14 +1,4 @@
-type comments = {
-  id: string;
-  text: string;
-};
-
-const comments: comments[] = [
-  { id: "1", text: "comment 1" },
-  { id: "2", text: "comment 2" },
-  { id: "3", text: "comment 3" },
-  { id: "4", text: "comment 4" },
-];
+import { comments, commentsType } from "./commentsArray";
 
 export function GET() {
   return Response.json(comments);
@@ -17,7 +7,7 @@ export function GET() {
 export async function POST(request: Request) {
   const comment = await request.json();
 
-  const newComment: comments = {
+  const newComment: commentsType = {
     text: comment.text,
     id: (comments.length + 1).toString(),
   };
