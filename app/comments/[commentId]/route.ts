@@ -1,4 +1,19 @@
+import { redirect } from "next/navigation";
 import { comments, commentsType } from "../commentsArray";
+
+export async function GET(
+  _request: Request,
+  { params }: { params: { commentId: string } }
+) {
+  if (parseInt(params.commentId) > comments.length) {
+    redirect("/comments");
+  }
+  const commentId = params.commentId;
+  const commentIndex = findIndex(commentId);
+  const comment = comments[commentIndex];
+
+  return Response.json(comment);
+}
 
 export async function PATCH(
   request: Request,
