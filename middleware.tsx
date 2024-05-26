@@ -14,6 +14,7 @@ export default async function middleware(req: NextRequest) {
 
   // 3. Retrieve the token from cookie
   let isUserAuthenticated = req.cookies.get("token");
+  console.log(isUserAuthenticated, "cookies");
 
   //   4. Redirect to /login if the user is not authenticated for protected routes
   if (isProtectedRoute && !isUserAuthenticated) {

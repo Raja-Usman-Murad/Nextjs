@@ -5,11 +5,11 @@ import useForm from "@/app/_Hooks/FormHook/useForm";
 import Link from "next/link";
 import React from "react";
 import { validateForm } from "../_formValidation/formValidation";
-import { addNewUser } from "@/app/_api/auth";
 import { showToast } from "@/app/_helper/toast";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const initialSignupFormState = {
   name: "",
@@ -44,7 +44,7 @@ const Signup: React.FC = () => {
     }
 
     try {
-      const response: any = await addNewUser(formData);
+      const response: any = await axios.post(`api/auth/signup`, formData);
 
       if (response.data.success) {
         showToast(response.data.message, "success");
