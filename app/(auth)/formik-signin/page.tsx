@@ -3,8 +3,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { signinValidationSchema } from "../_ValidationSchema/ValidationSchema";
-import InputField from "@/app/Components/UI/Form/InputField";
+import { signinValidationSchema } from "../_validationSchema/validationSchema";
+import InputField from "@/app/_Components/UI/Form/InputField";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 
 const FormikSignIn: React.FC = () => {
@@ -66,7 +66,7 @@ const FormikSignIn: React.FC = () => {
             <div className="text-center mt-4">
               <Link
                 className="text-blue-500 hover:text-blue-700"
-                href="FormikSignup"
+                href="formik-signup"
               >
                 Don't have an account? Create one.
               </Link>

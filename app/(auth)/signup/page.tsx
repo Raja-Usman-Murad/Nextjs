@@ -1,12 +1,12 @@
 // pages/signup.tsx
 "use client";
-import InputField from "@/app/Components/UI/Form/InputField";
-import useForm from "@/app/Hooks/FormHook/useForm";
+import InputField from "@/app/_Components/UI/Form/InputField";
+import useForm from "@/app/_Hooks/FormHook/useForm";
 import Link from "next/link";
 import React from "react";
-import { validateForm } from "../_FormValidation/FormValidation";
+import { validateForm } from "../_formValidation/formValidation";
 import { addNewUser } from "@/app/_api/auth";
-import { showToast } from "@/app/helper/toast";
+import { showToast } from "@/app/_helper/toast";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -51,7 +51,7 @@ const Signup: React.FC = () => {
         setFormData(initialSignupFormState);
         // Redirect to the sign-in page after successful sign-up
         setTimeout(() => {
-          router.push("Signin");
+          router.push("signin");
         }, 2000);
       } else {
         showToast(response.data.message, "error");
@@ -105,7 +105,7 @@ const Signup: React.FC = () => {
           Sign Up
         </button>
         <div className="text-center mt-4">
-          <Link href="Signin" className="text-blue-500 hover:text-blue-700">
+          <Link href="signin" className="text-blue-500 hover:text-blue-700">
             Already have an account? Log In
           </Link>
         </div>

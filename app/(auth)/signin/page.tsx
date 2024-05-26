@@ -1,14 +1,14 @@
 // pages/signin.tsx
 "use client";
 
-import InputField from "@/app/Components/UI/Form/InputField";
-import useForm from "@/app/Hooks/FormHook/useForm";
+import InputField from "@/app/_Components/UI/Form/InputField";
+import useForm from "@/app/_Hooks/FormHook/useForm";
 import Link from "next/link";
 import React from "react";
-import { validateForm } from "../_FormValidation/FormValidation";
+import { validateForm } from "../_formValidation/formValidation";
 import { login } from "@/app/_api/auth";
 import { useDispatch } from "react-redux";
-import { showToast } from "@/app/helper/toast";
+import { showToast } from "@/app/_helper/toast";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
@@ -103,7 +103,7 @@ const SignIn: React.FC = () => {
           Sign In
         </button>
         <div className="text-center mt-4">
-          <Link href="Signup" className="text-blue-500 hover:text-blue-700">
+          <Link href="signup" className="text-blue-500 hover:text-blue-700">
             Don't have an account? Create one.
           </Link>
         </div>

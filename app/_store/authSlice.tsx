@@ -3,7 +3,7 @@ import {
   getLocalStorage,
   removeLocalStorage,
   setLocalStorage,
-} from "../helper/localStorage";
+} from "../_helper/localStorage";
 
 interface SetAuthInitialState {
   token: string | null;

@@ -1,5 +1,5 @@
 // hooks/useForm.tsx
-import { validateForm } from "@/app/Auth/_FormValidation/FormValidation";
+import { validateForm } from "@/app/(auth)/_formValidation/formValidation";
 import { useState, ChangeEvent, FocusEvent } from "react";
 
 interface FormData {
