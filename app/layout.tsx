@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./_store/StoreProvider";
-
-const inter = Inter({ subsets: ["latin"] });
+import Header from "./_Components/Header/Header";
+import Footer from "./_Components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Next js",
@@ -18,7 +17,11 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className="h-screen flex flex-col">
+          <Header />
+          {children}
+          <Footer />
+        </body>
       </html>
     </StoreProvider>
   );
