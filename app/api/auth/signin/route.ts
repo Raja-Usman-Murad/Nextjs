@@ -11,10 +11,10 @@ export async function POST(request: NextRequest) {
     const response = await axios.post(`/auth/signin`, reqBody);
 
     if (response.data.success) {
-      //   const oneDay = 24 * 60 * 60 * 1000;
-      const oneHour = 60 * 60 * 1000;
+      const oneDay = 24 * 60 * 60 * 1000;
+      // const oneHour = 60 * 60 * 1000;
       cookies().set("token", response.data.data.token, {
-        expires: Date.now() + oneHour,
+        expires: Date.now() + oneDay,
       });
     }
     // Check the response status and propagate it correctly
