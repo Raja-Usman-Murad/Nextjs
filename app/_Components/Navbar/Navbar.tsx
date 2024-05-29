@@ -3,12 +3,32 @@
 import { useState } from "react";
 import Link from "next/link";
 import NavLinks from "./partials/NavLinks";
+import LogoutButton from "./partials/LogoutButton";
+import UserImage from "./partials/UserImage";
+import { authActions } from "@/app/_store/authSlice";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async () => {
+    dispatch(authActions.Logout());
+    try {
+      const response: any = await axios.get(`/api/auth/logout`);
+      if (response.data.success) {
+        router.push("/signin");
+      }
+    } catch (error) {
+      console.log(error, "error");
+    }
   };
 
   return (
@@ -25,17 +45,8 @@ const Navbar: React.FC = () => {
           </ul>
         </div>
         <div className="hidden md:block">
-          <button
-            className="text-white hover:text-gray-300"
-            onClick={() => alert("Logout clicked")}
-          >
-            Logout
-          </button>
-          <img
-            src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"
-            alt="User"
-            className="w-8 h-8 rounded-full ml-2"
-          />
+          <LogoutButton onClickHandler={handleLogout} />
+          <UserImage />
         </div>
         <div className="block md:hidden">
           <button
@@ -57,11 +68,17 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="md:hidden">
-          <ul className="mt-2">
-            <NavLinks />
-          </ul>
-        </div>
+        <>
+          <div className="md:hidden">
+            <ul className="mt-2">
+              <NavLinks />
+            </ul>
+          </div>
+          <div className="md:hidden">
+            <LogoutButton onClickHandler={handleLogout} />
+            <UserImage />
+          </div>
+        </>
       )}
     </nav>
   );

@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const publicRoutes = ["/signin", "/signup"];
-
 export default async function middleware(req: NextRequest) {
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname;
 
-  const isPublicRoute = publicRoutes.includes(path);
+  const isPublicRoute =
+    path.startsWith("/signin") || path.startsWith("/signup");
+  console.log(isPublicRoute, "isPublicRoute");
 
   // 3. Retrieve the token from cookie
   let isUserAuthenticated = req.cookies.get("token");
