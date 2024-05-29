@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import StoreProvider from "./_store/StoreProvider";
-import Header from "./_Components/Header/Header";
-import Footer from "./_Components/Footer/Footer";
+import ConditionalLayoutRendering from "./_Components/ConditionalLayoutRendering/ConditionalLayoutRendering";
 
 export const metadata: Metadata = {
   title: "Next js",
@@ -18,9 +17,7 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="en">
         <body className="h-screen flex flex-col">
-          <Header />
-          {children}
-          <Footer />
+          <ConditionalLayoutRendering>{children}</ConditionalLayoutRendering>
         </body>
       </html>
     </StoreProvider>
