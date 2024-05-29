@@ -4,7 +4,7 @@
 import InputField from "@/app/_Components/UI/Form/InputField";
 import useForm from "@/app/_Hooks/FormHook/useForm";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { validateForm } from "../_formValidation/formValidation";
 import { useDispatch } from "react-redux";
 import { showToast } from "@/app/_helper/toast";
@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import { authActions } from "@/app/_store/authSlice";
+import LoadingSpinner from "@/app/_Components/UI/LoadingSpinner/LoadingSpinner";
 
 const initialSigninFormState = {
   email: "",
@@ -24,6 +25,7 @@ const SignIn: React.FC = () => {
   const router = useRouter();
   const { formData, errors, handleChange, handleBlur, setErrors, setFormData } =
     useForm(initialSigninFormState);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,9 +50,11 @@ const SignIn: React.FC = () => {
     console.log("Form submitted:", formData);
 
     try {
+      setLoading(true);
       const response: any = await axios.post(`api/auth/signin`, formData);
 
       if (response.data.success) {
+        setLoading(false);
         dispatch(authActions.Login(response.data.data));
         // dispatch(getUser(response.data.payload.token));
 
@@ -61,9 +65,11 @@ const SignIn: React.FC = () => {
           router.push("/");
         }, 2000);
       } else {
+        setLoading(false);
         showToast(response.data.message, "error");
       }
     } catch (error) {
+      setLoading(false);
       console.error("Error signing in:", error);
       showToast("An error occurred. Please try again.", "error");
     }
@@ -100,6 +106,7 @@ const SignIn: React.FC = () => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
         >
           Sign In
+          {loading && <LoadingSpinner />}
         </button>
         <div className="text-center mt-4">
           <Link href="signup" className="text-blue-500 hover:text-blue-700">

@@ -3,13 +3,14 @@
 import InputField from "@/app/_Components/UI/Form/InputField";
 import useForm from "@/app/_Hooks/FormHook/useForm";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { validateForm } from "../_formValidation/formValidation";
 import { showToast } from "@/app/_helper/toast";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import LoadingSpinner from "@/app/_Components/UI/LoadingSpinner/LoadingSpinner";
 
 const initialSignupFormState = {
   name: "",
@@ -21,6 +22,8 @@ const Signup: React.FC = () => {
   const router = useRouter();
   const { formData, errors, handleChange, handleBlur, setErrors, setFormData } =
     useForm(initialSignupFormState);
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,9 +47,11 @@ const Signup: React.FC = () => {
     }
 
     try {
+      setLoading(true);
       const response: any = await axios.post(`api/auth/signup`, formData);
 
       if (response.data.success) {
+        setLoading(false);
         showToast(response.data.message, "success");
         setFormData(initialSignupFormState);
         // Redirect to the sign-in page after successful sign-up
@@ -54,9 +59,11 @@ const Signup: React.FC = () => {
           router.push("signin");
         }, 2000);
       } else {
+        setLoading(false);
         showToast(response.data.message, "error");
       }
     } catch (error) {
+      setLoading(false);
       console.error("Error signing up:", error);
       showToast("An error occurred. Please try again.", "error");
     }
@@ -103,6 +110,7 @@ const Signup: React.FC = () => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
         >
           Sign Up
+          {loading && <LoadingSpinner />}
         </button>
         <div className="text-center mt-4">
           <Link href="signin" className="text-blue-500 hover:text-blue-700">
