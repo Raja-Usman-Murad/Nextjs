@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import classes from "./page.module.css";
 import Link from "next/link";
-import ListsGrid from "../_Components/Lists/ListsGrid";
-import { getLists } from "../lib/lists/lists";
+import ListsGrid from "../../components/Lists/ListsGrid";
+import { getLists } from "../../lib/lists/lists";
 
 async function GetLists() {
   const response = await getLists();
@@ -17,6 +17,8 @@ async function GetLists() {
 }
 
 export default function Lists() {
+  console.log("abbbbbbc");
+
   return (
     <>
       <header className={classes.header}>

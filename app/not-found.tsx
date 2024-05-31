@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const NotFoundPage = () => {
   return (
@@ -7,10 +8,12 @@ const NotFoundPage = () => {
       <div className="container mx-auto">
         <div className="flex flex-col items-center">
           <div className="mb-6 text-center">
-            <img
+            <Image
               alt="Under development"
-              src={"/error-404.png"}
+              src="/error-404.png"
               className="inline-block max-w-full w-64"
+              width={500}
+              height={500}
             />
           </div>
           <h3 className="mb-6 text-3xl">

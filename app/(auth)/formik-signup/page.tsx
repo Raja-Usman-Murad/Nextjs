@@ -4,8 +4,8 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import Link from "next/link";
-import InputField from "@/app/_Components/UI/Form/InputField";
-import { signupValidationSchema } from "../_validationSchema/validationSchema";
+import InputField from "@/components/UI/Form/InputField";
+import { signupValidationSchema } from "../../../lib/authValidations/authValidationSchema/validationSchema";
 
 const FormikSignup: React.FC = () => {
   const initialValues = {

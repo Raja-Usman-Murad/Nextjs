@@ -1,19 +1,19 @@
 // pages/signin.tsx
 "use client";
 
-import InputField from "@/app/_Components/UI/Form/InputField";
-import useForm from "@/app/_Hooks/FormHook/useForm";
+import InputField from "@/components/UI/Form/InputField";
+import useForm from "@/customHooks/FormHook/useForm";
 import Link from "next/link";
 import React, { useState } from "react";
-import { validateForm } from "../_formValidation/formValidation";
+import { validateForm } from "../../../lib/authValidations/formValidation/formValidation";
 import { useDispatch } from "react-redux";
-import { showToast } from "@/app/_helper/toast";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
-import { authActions } from "@/app/_store/authSlice";
-import LoadingSpinner from "@/app/_Components/UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
+import { authActions } from "@/reduxStore/slices/authSlice";
+import { showToast } from "@/helper/toast";
 
 const initialSigninFormState = {
   email: "",
@@ -110,7 +110,7 @@ const SignIn: React.FC = () => {
         </button>
         <div className="text-center mt-4">
           <Link href="signup" className="text-blue-500 hover:text-blue-700">
-            Don't have an account? Create one.
+            Dont have an account? Create one.
           </Link>
         </div>
       </form>

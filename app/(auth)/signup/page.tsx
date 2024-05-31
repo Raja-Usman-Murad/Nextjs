@@ -1,16 +1,17 @@
 // pages/signup.tsx
 "use client";
-import InputField from "@/app/_Components/UI/Form/InputField";
-import useForm from "@/app/_Hooks/FormHook/useForm";
+import InputField from "@/components/UI/Form/InputField";
+import useForm from "@/customHooks/FormHook/useForm";
 import Link from "next/link";
 import React, { useState } from "react";
-import { validateForm } from "../_formValidation/formValidation";
-import { showToast } from "@/app/_helper/toast";
+import { validateForm } from "../../../lib/authValidations/formValidation/formValidation";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import LoadingSpinner from "@/app/_Components/UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
+import { showToast } from "@/helper/toast";
 
 const initialSignupFormState = {
   name: "",

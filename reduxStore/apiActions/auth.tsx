@@ -1,6 +1,6 @@
 import axios from ".";
 import { AxiosResponse } from "axios";
-import { authActions } from "../_store/authSlice";
+import { authActions } from "../slices/authSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 
 // interface signupUserData {

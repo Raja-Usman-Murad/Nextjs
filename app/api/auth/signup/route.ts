@@ -1,5 +1,5 @@
 export const dynamic = "force-dynamic"; // defaults to auto
-import { axios } from "../../../_configs/config";
+import { axios } from "../../../../configs/config";
 
 import { NextRequest, NextResponse } from "next/server";
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import StoreProvider from "./_store/StoreProvider";
-import ConditionalLayoutRendering from "./_Components/ConditionalLayoutRendering/ConditionalLayoutRendering";
+import StoreProvider from "../reduxStore/StoreProvider";
+import ConditionalLayoutRendering from "../components/ConditionalLayoutRendering/ConditionalLayoutRendering";
 
 export const metadata: Metadata = {
   title: "Next js",

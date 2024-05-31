@@ -5,10 +5,10 @@ import Link from "next/link";
 import NavLinks from "./partials/NavLinks";
 import LogoutButton from "./partials/LogoutButton";
 import UserImage from "./partials/UserImage";
-import { authActions } from "@/app/_store/authSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { authActions } from "@/reduxStore/slices/authSlice";
 
 const Navbar: React.FC = () => {
   const router = useRouter();

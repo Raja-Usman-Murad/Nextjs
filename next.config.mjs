@@ -8,6 +8,12 @@ const nextConfig = {
         port: "",
         pathname: "/photos/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+        port: "",
+        pathname: "/photo/**",
+      },
     ],
   },
 };
