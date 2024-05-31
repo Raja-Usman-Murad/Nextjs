@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const ConditionalLayoutRendering = ({
   children,
@@ -14,6 +16,7 @@ const ConditionalLayoutRendering = ({
 
   return (
     <>
+      <ToastContainer />
       {!isAuthPage && <Header />}
       {children}
       {!isAuthPage && <Footer />}

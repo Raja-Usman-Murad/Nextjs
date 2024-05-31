@@ -8,8 +8,6 @@ import React, { useState } from "react";
 import { validateForm } from "../../../lib/authValidations/formValidation/formValidation";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
 import { authActions } from "@/reduxStore/slices/authSlice";
@@ -114,7 +112,6 @@ const SignIn: React.FC = () => {
           </Link>
         </div>
       </form>
-      <ToastContainer />
     </div>
   );
 };

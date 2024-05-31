@@ -6,8 +6,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { validateForm } from "../../../lib/authValidations/formValidation/formValidation";
 
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
@@ -119,7 +117,6 @@ const Signup: React.FC = () => {
           </Link>
         </div>
       </form>
-      <ToastContainer />
     </div>
   );
 };
