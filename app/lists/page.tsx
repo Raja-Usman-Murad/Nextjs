@@ -7,18 +7,16 @@ import { getLists } from "../../lib/lists/lists";
 async function GetLists() {
   const response = await getLists();
 
-  if (response.success === true) {
+  if (response?.success === true) {
     return <ListsGrid lists={response.data} />;
   }
-  if (response.success === false) {
+  if (response?.success === false) {
     throw Error(response?.message);
   }
-  throw Error(response?.message);
+  throw Error(response);
 }
 
 export default function Lists() {
-  console.log("abbbbbbc");
-
   return (
     <>
       <header className={classes.header}>
