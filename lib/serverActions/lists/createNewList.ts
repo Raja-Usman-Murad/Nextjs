@@ -2,19 +2,27 @@
 
 import { redirect } from "next/navigation";
 
-import { saveMeal } from "./meals";
 import { revalidatePath } from "next/cache";
 import { createNewList } from "@/lib/lists/lists";
 
-function isInvalidText(text) {
+export interface List {
+  title: string;
+  email: string;
+  description: string;
+}
+
+function isInvalidText(text: string) {
   return !text || text.trim() === "";
 }
 
-export async function createNewListAction(prevState, formData) {
-  const list = {
-    title: formData.get("title"),
-    email: formData.get("email"),
-    description: formData.get("description"),
+export async function createNewListAction(
+  _prevState: any,
+  formData: any
+): Promise<any> {
+  const list: List = {
+    title: formData.get("title") as string,
+    email: formData.get("email") as string,
+    description: formData.get("description") as string,
     // image: formData.get("image"),
   };
 

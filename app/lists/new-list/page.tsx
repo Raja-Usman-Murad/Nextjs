@@ -14,6 +14,13 @@ export default function CreateNewList() {
   });
   console.log(state, "state");
   console.log(Array.isArray(state?.message), "state");
+  if (state?.message) {
+    if (Array.isArray(state.message)) {
+      state.message.forEach((message: string) => showToast(message, "error"));
+    } else {
+      showToast(state.message, "error");
+    }
+  }
 
   return (
     <>
@@ -39,14 +46,11 @@ export default function CreateNewList() {
             <textarea
               id="description"
               name="description"
-              rows="5"
+              rows={5}
               required
             ></textarea>
           </p>
           <ImagePicker label="Your image" name="image" />
-          {state?.message && Array.isArray(state?.message)
-            ? state?.message?.forEach((message) => showToast(message, "error"))
-            : showToast(state?.message, "error")}
           <p className={classes.actions}>
             <MealsFormSubmit />
           </p>
