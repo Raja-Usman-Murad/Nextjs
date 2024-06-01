@@ -15,6 +15,35 @@ export async function getLists() {
   }
 }
 
+export const getListById = async (listId: string) => {
+  try {
+    const response = await axios.get(`list/${listId}`);
+    await new Promise<void>((resolve) => setTimeout(resolve, 2000));
+    return response.data;
+  } catch (error) {
+    console.log(error, "error123");
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response.data.message;
+    }
+    return "Network Error";
+  }
+};
+
+export const deleteList = async (listId: string) => {
+  try {
+    const response = await axios.delete(`list/${listId}`);
+
+    await new Promise<void>((resolve) => setTimeout(resolve, 2000));
+    return response.data;
+  } catch (error) {
+    console.log(error, "error123");
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response.data.message;
+    }
+    return "Network Error";
+  }
+};
+
 export async function createNewList(list: List) {
   try {
     const response = await axios.post("list", list);

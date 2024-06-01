@@ -5,7 +5,7 @@ import { useFormState } from "react-dom";
 import classes from "./page.module.css";
 import { createNewListAction } from "@/lib/serverActions/lists/createNewList";
 import ImagePicker from "@/components/Lists/imagePicker";
-import MealsFormSubmit from "@/components/Lists/listFormSubmitButton";
+import ListsFormSubmitButton from "@/components/Lists/listFormSubmitButton";
 import { showToast } from "@/helper/toast";
 
 export default function CreateNewList() {
@@ -52,7 +52,10 @@ export default function CreateNewList() {
           </p>
           <ImagePicker label="Your image" name="image" />
           <p className={classes.actions}>
-            <MealsFormSubmit />
+            <ListsFormSubmitButton
+              actualText={"Create List"}
+              pendingText={"Submitting...."}
+            />
           </p>
         </form>
       </main>
