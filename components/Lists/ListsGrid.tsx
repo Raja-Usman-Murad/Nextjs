@@ -22,7 +22,7 @@ const ListsGrid: React.FC<ListsGridProps> = ({ lists }) => {
     <>
       <div className="row no-gutters">
         {lists.map((list) => (
-          <ListItem {...list} />
+          <ListItem key={list._id} {...list} />
         ))}
       </div>
     </>

@@ -22,7 +22,7 @@ const ListItem: React.FC<ListItemProps> = ({
 }) => {
   return (
     <>
-      <div key={_id} className="col-12 col-md-6 col-lg-4 my-2">
+      <div className="col-12 col-md-6 col-lg-4 my-2">
         <div className="card mx-auto" style={{ width: 18 + "rem" }}>
           {/* <Image src={image} alt={title} fill /> */}
           <Image
