@@ -13,7 +13,7 @@ interface ListItemProps {
   listData?: {
     _id: string;
     title: string;
-    //   image: string;
+    image: string;
     description: string;
     email: string;
   };
@@ -79,7 +79,11 @@ const CreateNewList: React.FC<ListItemProps> = ({ listData }) => {
               defaultValue={listData?.description || ""}
             ></textarea>
           </p>
-          <ImagePicker label="Your image" name="image" />
+          <ImagePicker
+            label="Your image"
+            name="image"
+            imageUrl={listData?.image || ""}
+          />
           <p className={classes.actions}>
             <ListsFormSubmitButton
               actualText={updatePage ? "Update List" : "Create List"}

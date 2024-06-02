@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "cloudinary": "^2.2.0",
     "formik": "^2.4.6",
     "next": "14.2.3",
     "nookies": "^2.5.2",
