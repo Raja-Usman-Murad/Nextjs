@@ -6,7 +6,6 @@ interface ListsGridProps {
   lists: {
     _id: string;
     title: string;
-    // slug: string;
     // image: string;
     description: string;
     email: string;

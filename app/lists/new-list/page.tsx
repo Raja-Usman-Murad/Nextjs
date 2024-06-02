@@ -13,7 +13,6 @@ interface ListItemProps {
   listData?: {
     _id: string;
     title: string;
-    //   slug: string;
     //   image: string;
     description: string;
     email: string;
@@ -29,6 +28,7 @@ const CreateNewList: React.FC<ListItemProps> = ({ listData }) => {
   const [state, formAction] = useFormState(action, {
     message: null,
   });
+
   if (state?.message) {
     if (Array.isArray(state.message)) {
       state.message.forEach((message: string) => showToast(message, "error"));

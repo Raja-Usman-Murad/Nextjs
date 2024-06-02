@@ -1,3 +1,5 @@
+import classes from "./loading.module.css";
+
 export default function updateListLoadingPage() {
-  return <p className="text-center">Page is loading</p>;
+  return <p className={classes.loading}>Page is loading....</p>;
 }

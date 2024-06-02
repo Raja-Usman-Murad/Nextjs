@@ -6,7 +6,6 @@ import { deleteListAction } from "@/lib/serverActions/lists/deleteListAction";
 interface ListItemProps {
   _id: string;
   title: string;
-  //   slug: string;
   //   image: string;
   description: string;
   email: string;
@@ -18,7 +17,7 @@ const ListItem: React.FC<ListItemProps> = ({
   title,
   description,
   email,
-  deleteButton = false,
+  deleteButton,
 }) => {
   return (
     <>
@@ -32,7 +31,6 @@ const ListItem: React.FC<ListItemProps> = ({
             height={350}
             className="card-img-top"
           />
-          {/* <img src="..." className="card-img-top" alt="..."> */}
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <h5 className="card-title">by {email}</h5>
