@@ -44,8 +44,6 @@ const SignIn: React.FC = () => {
     ) {
       return;
     }
-    // Submit the form (e.g., send data to an API)
-    console.log("Form submitted:", formData);
 
     try {
       setLoading(true);

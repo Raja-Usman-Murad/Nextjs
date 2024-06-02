@@ -6,11 +6,9 @@ export default async function middleware(req: NextRequest) {
 
   const isPublicRoute =
     path.startsWith("/signin") || path.startsWith("/signup");
-  console.log(isPublicRoute, "isPublicRoute");
 
   // 3. Retrieve the token from cookie
   let isUserAuthenticated = req.cookies.get("token");
-  console.log(isUserAuthenticated, "cookies");
 
   if (isPublicRoute && isUserAuthenticated) {
     return NextResponse.redirect(new URL("/", req.nextUrl));
