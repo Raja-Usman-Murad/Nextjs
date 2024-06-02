@@ -1,6 +1,5 @@
 import React from "react";
 import ListItem from "./ListItem";
-import classes from "./listsGrid.module.css";
 
 // Define the props type
 interface ListsGridProps {
@@ -20,13 +19,13 @@ const ListsGrid: React.FC<ListsGridProps> = ({ lists }) => {
     return <p className="text-center">No list Found</p>;
   }
   return (
-    <ul className={classes.lists}>
-      {lists.map((list) => (
-        <li key={list._id}>
+    <>
+      <div className="row no-gutters">
+        {lists.map((list) => (
           <ListItem {...list} />
-        </li>
-      ))}
-    </ul>
+        ))}
+      </div>
+    </>
   );
 };
 

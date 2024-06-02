@@ -3,8 +3,6 @@ import classes from "./page.module.css";
 import ListItem from "@/components/Lists/ListItem";
 import { getListById } from "@/lib/lists/lists";
 import { Suspense } from "react";
-import DeleteButton from "@/components/Lists/deleteButton";
-import { deleteListAction } from "@/lib/serverActions/lists/deleteListAction";
 
 async function GetList({ listId }: { listId: string }) {
   const response = await getListById(listId);
@@ -15,8 +13,7 @@ async function GetList({ listId }: { listId: string }) {
     }
     return (
       <>
-        <DeleteButton deleteAction={deleteListAction} listId={listId} />
-        <ListItem {...response?.data} />
+        <ListItem {...response?.data} deleteButton={true} />
       </>
     );
   }
