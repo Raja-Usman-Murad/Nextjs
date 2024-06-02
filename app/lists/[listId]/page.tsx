@@ -36,7 +36,7 @@ export default async function Lists({
         </h1>
         <p>You can Update and Delete</p>
         <p className={classes.cta}>
-          <Link href={`/lists/${params.listId}/edit`}>Update list</Link>
+          <Link href={`/lists/${params.listId}/edit-list`}>Update list</Link>
         </p>
       </header>
       <main className={classes.main}>
