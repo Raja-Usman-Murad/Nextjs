@@ -7,13 +7,28 @@ import { createNewListAction } from "@/lib/serverActions/lists/createNewList";
 import ImagePicker from "@/components/Lists/imagePicker";
 import ListsFormSubmitButton from "@/components/Lists/listFormSubmitButton";
 import { showToast } from "@/helper/toast";
+import { updateListAction } from "@/lib/serverActions/lists/updateListAction";
 
-export default function CreateNewList() {
-  const [state, formAction] = useFormState(createNewListAction, {
+interface ListItemProps {
+  listData?: {
+    _id: string;
+    title: string;
+    //   slug: string;
+    //   image: string;
+    description: string;
+    email: string;
+  };
+}
+
+const CreateNewList: React.FC<ListItemProps> = ({ listData }) => {
+  const updatePage = listData;
+  const action = listData
+    ? updateListAction.bind(null, listData._id)
+    : createNewListAction;
+
+  const [state, formAction] = useFormState(action, {
     message: null,
   });
-  console.log(state, "state");
-  console.log(Array.isArray(state?.message), "state");
   if (state?.message) {
     if (Array.isArray(state.message)) {
       state.message.forEach((message: string) => showToast(message, "error"));
@@ -26,7 +41,8 @@ export default function CreateNewList() {
     <>
       <header className={classes.header}>
         <h1>
-          Create a new <span className={classes.highlight}>list</span>
+          {updatePage ? "Update" : "Create"} a {updatePage ? "" : "new"}
+          <span className={classes.highlight}>list</span>
         </h1>
       </header>
       <main className={classes.main}>
@@ -34,11 +50,23 @@ export default function CreateNewList() {
           <div className={classes.row}>
             <p>
               <label htmlFor="title">Your title</label>
-              <input type="text" id="title" name="title" required />
+              <input
+                type="text"
+                id="title"
+                name="title"
+                defaultValue={listData?.title || ""}
+                required
+              />
             </p>
             <p>
               <label htmlFor="email">Your email</label>
-              <input type="email" id="email" name="email" required />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                defaultValue={listData?.email || ""}
+              />
             </p>
           </div>
           <p>
@@ -48,17 +76,20 @@ export default function CreateNewList() {
               name="description"
               rows={5}
               required
+              defaultValue={listData?.description || ""}
             ></textarea>
           </p>
           <ImagePicker label="Your image" name="image" />
           <p className={classes.actions}>
             <ListsFormSubmitButton
-              actualText={"Create List"}
-              pendingText={"Submitting...."}
+              actualText={updatePage ? "Update List" : "Create List"}
+              pendingText={updatePage ? "Updating...." : "Submitting...."}
             />
           </p>
         </form>
       </main>
     </>
   );
-}
+};
+
+export default CreateNewList;

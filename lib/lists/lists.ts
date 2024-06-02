@@ -1,5 +1,6 @@
 import { axios } from "@/configs/config";
 import { List } from "../serverActions/lists/createNewList";
+import { checkErrorResponse } from "./checkErrorResponse";
 
 export async function getLists() {
   try {
@@ -8,10 +9,7 @@ export async function getLists() {
     return response.data;
   } catch (error: any) {
     console.log(error, "error123");
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data.message;
-    }
-    return "Network Error";
+    return checkErrorResponse(error);
   }
 }
 
@@ -22,10 +20,7 @@ export const getListById = async (listId: string) => {
     return response.data;
   } catch (error) {
     console.log(error, "error123");
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data.message;
-    }
-    return "Network Error";
+    return checkErrorResponse(error);
   }
 };
 
@@ -37,10 +32,7 @@ export const deleteList = async (listId: string) => {
     return response.data;
   } catch (error) {
     console.log(error, "error123");
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data.message;
-    }
-    return "Network Error";
+    return checkErrorResponse(error);
   }
 };
 
@@ -51,36 +43,16 @@ export async function createNewList(list: List) {
     return response.data;
   } catch (error: any) {
     console.log(error, "error123");
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data.message;
-    }
-    return "Network Error";
+    return checkErrorResponse(error);
   }
-  // meal.slug = slugify(meal.title, { lower: true });
-  // meal.instructions = xss(meal.instructions);
-  // const extension = meal.image.name.split(".").pop();
-  // const fileName = `${meal.slug}.${extension}`;
-  // const stream = fs.createWriteStream(`public/images/${fileName}`);
-  // const bufferedImage = await meal.image.arrayBuffer();
-  // stream.write(Buffer.from(bufferedImage), (error) => {
-  //   if (error) {
-  //     throw new Error("Saving image failed!");
-  //   }
-  // });
-  // meal.image = `/images/${fileName}`;
-  // db.prepare(
-  //   `
-  //   INSERT INTO meals
-  //     (title, summary, instructions, creator, creator_email, image, slug)
-  //   VALUES (
-  //     @title,
-  //     @summary,
-  //     @instructions,
-  //     @creator,
-  //     @creator_email,
-  //     @image,
-  //     @slug
-  //   )
-  // `
-  // ).run(meal);
+}
+export async function updateList(list: List, listId: string) {
+  try {
+    const response = await axios.patch(`list/${listId}`, list);
+    await new Promise<void>((resolve) => setTimeout(resolve, 2000));
+    return response.data;
+  } catch (error: any) {
+    console.log(error, "error123");
+    return checkErrorResponse(error);
+  }
 }
