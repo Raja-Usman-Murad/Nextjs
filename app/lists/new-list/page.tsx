@@ -22,7 +22,7 @@ interface ListItemProps {
 const CreateNewList: React.FC<ListItemProps> = ({ listData }) => {
   const updatePage = listData;
   const action = listData
-    ? updateListAction.bind(null, listData._id)
+    ? updateListAction.bind(null, listData._id, listData?.image)
     : createNewListAction;
 
   const [state, formAction] = useFormState(action, {

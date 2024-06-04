@@ -19,6 +19,7 @@ function isInvalidText(text: string) {
 
 export async function updateListAction(
   listId: string,
+  existingImageUrl: string,
   _prevState: any,
   formData: any
 ): Promise<any> {
@@ -31,9 +32,7 @@ export async function updateListAction(
     isInvalidText(title) ||
     isInvalidText(description) ||
     isInvalidText(email) ||
-    !email.includes("@") ||
-    !image ||
-    image.size === 0
+    !email.includes("@")
   ) {
     return {
       message: "Invalid input.",
@@ -41,14 +40,18 @@ export async function updateListAction(
   }
 
   let imageUrl;
-  try {
-    imageUrl = await uploadImage(image);
-    console.log(imageUrl, "imageUrl");
-  } catch (error) {
-    throw new Error(
-      "Image upload failed, list was not created. Please try again later."
-    );
+  if (!image || image.size === 0) {
+    imageUrl = existingImageUrl;
+  } else {
+    try {
+      imageUrl = await uploadImage(image);
+    } catch (error) {
+      throw new Error(
+        "Image upload failed, list was not created. Please try again later."
+      );
+    }
   }
+
   const list: List = {
     title,
     email,
