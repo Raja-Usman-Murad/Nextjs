@@ -23,7 +23,7 @@ const ListItem: React.FC<ListItemProps> = ({
   return (
     <>
       <div className="col-12 col-md-6 col-lg-4 my-2">
-        <div className="card mx-auto" style={{ width: 18 + "rem" }}>
+        <div className="card mx-auto h-100" style={{ width: 18 + "rem" }}>
           <Image
             src={image}
             alt={title}
@@ -38,7 +38,7 @@ const ListItem: React.FC<ListItemProps> = ({
             height={350}
             className="card-img-top"
           /> */}
-          <div className="card-body">
+          <div className="card-body d-flex flex-column justify-content-end">
             <h5 className="card-title">{title}</h5>
             <h5 className="card-title">by {email}</h5>
             <p className="card-text">{description}</p>
@@ -47,7 +47,7 @@ const ListItem: React.FC<ListItemProps> = ({
             ) : (
               <Link
                 href={`/lists/${_id}`}
-                className="btn btn-outline-primary mt-2"
+                className="btn btn-outline-primary mt-2 align-self-baseline"
               >
                 View Details
               </Link>
